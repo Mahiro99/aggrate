@@ -1,16 +1,10 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import styles from '../styles/Home.module.css'
-import { Button } from "@chakra-ui/react"
-import { FcRating } from "react-icons/fc";
-import { GrArticle } from "react-icons/gr";
 import { Search } from '../components/Search'
-import { React, useRef } from 'react'
-import { useDisclosure } from "@chakra-ui/react"
+import { React } from 'react'
 
 export default function Home() {
-  const btnRef = useRef()
-	const { onOpen } = useDisclosure()
+
 
   return (
     <div className={styles.container}>

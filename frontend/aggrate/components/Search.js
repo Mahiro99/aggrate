@@ -10,36 +10,76 @@ import {
 	DrawerContent,
 	DrawerCloseButton,
   } from "@chakra-ui/react"
+import { FormControl } from "@chakra-ui/react"
 import { useDisclosure } from "@chakra-ui/react"
 import { FcSearch } from "react-icons/fc";
+import { FaImdb } from "react-icons/fa";
+import { useFormik } from 'formik';
+import { useRouter } from 'next/router'
+
+
 
 export const Search = (props) => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
-	const btnRef = useRef()
+	const router = useRouter(0)
+	const openingField = useRef()
+
+	const handleSearch = useFormik({
+		initialValues: {
+			searchInput: ''
+		},
+		onSubmit: values => {
+			return (
+				router.push({
+					pathname: '/list/shows',
+					query: {searchInput : values.searchInput},
+				  })
+			)
+		},
+	});
+
+	const handleEnterOnSubmit = (event) =>{
+		if(event.key == 'Enter'){
+			console.log(event)
+			handleSearch.handleSubmit()
+		}
+	}
 
 	return (
 	  <>
-		<Button ref={btnRef} leftIcon={< FcSearch />} colorScheme="blue" variant="ghost" onClick={onOpen}>Search</Button>
+		<Button 
+			leftIcon={props.category == 'IMDB' ? <FaImdb/> : <FcSearch/> } 
+			colorScheme="blue" 
+			variant="ghost" 
+			onClick={onOpen}>Search
+		</Button>
 		<Drawer
 		  isOpen={isOpen}
 		  placement="bottom"
 		  onClose={onClose}
-		  finalFocusRef={btnRef}
+		  initialFocusRef={openingField}
 		>
 		  <DrawerOverlay />
 		  <DrawerContent>
 			<DrawerCloseButton />
-			<DrawerHeader>Your Favorites!</DrawerHeader>
+			<DrawerHeader>Search for your {props.category == 'IMDB' ? 'favourite Movies/TV Shows' : 'favourite Animes'}</DrawerHeader>
   
 			<DrawerBody>
-			  <Input placeholder={"Search " + props.category + ' ...'} />
+				<FormControl onKeyPress = {handleEnterOnSubmit}>
+					<Input 
+						id="searchInput"
+						placeholder={"Search " + props.category + ' ...'} 
+						ref={openingField}
+						onChange={handleSearch.handleChange}
+						value={handleSearch.values.searchInput}
+					/>
+				</FormControl>
 			</DrawerBody>
-  
 			<DrawerFooter>
 			  <Button variant="outline" mr={3} onClick={onClose}>
 				Cancel
 			  </Button>
-			  <Button colorScheme="blue">Search</Button>
+			  <Button type="submit" colorScheme="blue" onClick={handleSearch.handleSubmit}>Search</Button>
 			</DrawerFooter>
 		  </DrawerContent>
 		</Drawer>
