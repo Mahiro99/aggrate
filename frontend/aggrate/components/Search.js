@@ -16,7 +16,7 @@ import { FcSearch } from "react-icons/fc";
 import { FaImdb } from "react-icons/fa";
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router'
-
+import { motion } from 'framer-motion';
 
 
 export const Search = (props) => {

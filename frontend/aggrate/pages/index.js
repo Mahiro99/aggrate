@@ -2,6 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { Search } from '../components/Search'
 import { React } from 'react'
+import { motion } from 'framer-motion';
 
 export default function Home() {
 
@@ -17,12 +18,28 @@ export default function Home() {
       <main className={styles.main}>
         <h1 className={styles.title}>
           Aggrate!
-        </h1>
-
-        <p className={styles.description}>
-          Your one stop for all things{' '}
-          <code className={styles.code}>rated</code>
-        </p>
+        </h1> 
+        
+        <div>
+        <motion.div initial="hidden" animate="visible" variants={{
+            hidden: {
+              scale: .8,
+              opacity: 0
+            },
+            visible: {
+              scale: 1,
+              opacity: 1,
+              transition: {
+                delay: .2
+              }
+            },
+          }}>
+          <p>
+            Your one stop for all things{' '}
+            <code className={styles.code}>rated</code>
+          </p>
+        </motion.div>
+        </div>
 
         <div className={styles.grid}>
           <a className={styles.card}>
