@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
 import asyncio
 from jikanpy import Jikan
 
@@ -20,7 +19,6 @@ app.add_middleware(
 
 
 jikan = Jikan()
-
 
 @app.get('/data/{searchData}')
 async def root(searchData):
