@@ -1,24 +1,36 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
 import asyncio
 from jikanpy import Jikan
 
 
 app = FastAPI()
+origins = [
+    "http://localhost:3000",
+    "localhost:3000"
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
+
 jikan = Jikan()
 
 
-@app.get('/')
-async def root():
-    smth = getAnimeReviews()
+@app.get('/data/{searchData}')
+async def root(searchData):
+    smth = getBasicAnimeData(searchData)
     return {"Message" : smth}
 
 
-#local file storage
-
-def getAnimeReviews():
-    naruto = jikan.anime(20)
-    searchResult = jikan.search('anime', 'Jojo')
-    return naruto
+def getBasicAnimeData(searchData):
+    searchResult = jikan.search('anime', searchData.lower())
+    return searchResult
 
 
 
