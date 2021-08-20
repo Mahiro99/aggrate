@@ -26,13 +26,13 @@ export const Search = (props) => {
 
 	const handleSearch = useFormik({
 		initialValues: {
-			searchInput: ''
+			search: ''
 		},
 		onSubmit: values => {
 			return (
 				router.push({
-					pathname: '/list/shows',
-					query: {searchInput : values.searchInput},
+					pathname: '/shows',
+					query: {search : values.search},
 				  })
 			)
 		},
@@ -67,11 +67,11 @@ export const Search = (props) => {
 			<DrawerBody>
 				<FormControl onKeyPress = {handleEnterOnSubmit}>
 					<Input 
-						id="searchInput"
+						id="search"
 						placeholder={"Search " + props.category + ' ...'} 
 						ref={openingField}
 						onChange={handleSearch.handleChange}
-						value={handleSearch.values.searchInput}
+						value={handleSearch.values.search}
 					/>
 				</FormControl>
 			</DrawerBody>
