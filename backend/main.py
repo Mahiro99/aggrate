@@ -1,7 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import asyncio
+import config
+
+
 from jikanpy import Jikan
+import tmdbsimple as tmdb
+
+tmdb.API_KEY = config.tmdbAPIKey
 
 
 app = FastAPI()
@@ -23,14 +29,19 @@ jikan = Jikan()
 @app.get('/data/{searchData}')
 async def root(searchData):
     smth = getBasicAnimeData(searchData)
+    # smth = getBasicTmdbData()
     return {"Message" : smth}
 
 
 def getBasicAnimeData(searchData):
     searchResult = jikan.search('anime', searchData.lower())
+
     return searchResult
 
-
+def getBasicTmdbData():
+    showSearch = tmdb.Search()
+    response = showSearch.tv(query = 'naruto')
+    return 
 
 # Structure Search of just the name
     # --> an array of search.results
