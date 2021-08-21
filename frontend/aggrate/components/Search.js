@@ -16,8 +16,7 @@ import { FcSearch } from "react-icons/fc";
 import { FaImdb } from "react-icons/fa";
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router'
-import { motion } from 'framer-motion';
-
+import Image from 'next/image'
 
 export const Search = (props) => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
@@ -32,7 +31,10 @@ export const Search = (props) => {
 			return (
 				router.push({
 					pathname: '/shows',
-					query: {search : values.search},
+					query: {
+						tag: props.category,
+						search : values.search
+					},
 				  })
 			)
 		},
@@ -48,7 +50,7 @@ export const Search = (props) => {
 	return (
 	  <>
 		<Button 
-			leftIcon={props.category == 'IMDB' ? <FaImdb/> : <FcSearch/> } 
+			leftIcon={props.category == 'tmdb' ? <Image src = '/tmdb.svg' width='16' height ='16'/> : <Image src = '/mal.png' width='16' height ='16' /> } 
 			colorScheme="blue" 
 			variant="ghost" 
 			onClick={onOpen}>Search
@@ -62,7 +64,7 @@ export const Search = (props) => {
 		  <DrawerOverlay />
 		  <DrawerContent>
 			<DrawerCloseButton />
-			<DrawerHeader>Search for your {props.category == 'IMDB' ? 'favourite Movies/TV Shows' : 'favourite Animes'}</DrawerHeader>
+			<DrawerHeader>Search for your {props.category == 'tmdb' ? 'favourite Movies/TV Shows' : 'favourite Animes'}</DrawerHeader>
   
 			<DrawerBody>
 				<FormControl onKeyPress = {handleEnterOnSubmit}>

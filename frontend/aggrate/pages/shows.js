@@ -1,46 +1,64 @@
-import { React, useEffect, useState} from 'react'
-import { useRouter } from 'next/router'
-import Head from 'next/head'
-import { RenderSearchList } from '../components/RenderSearchList';
+import { React, useState} from 'react'
 import axios from 'axios'
 import { Image } from "@chakra-ui/react"
+import { Button } from "@chakra-ui/react"
 
-export default function list ({anime}) {
+
+
+export default function list ({anime, tag}) {
+  const [numberOfitemsShown, setNumberOfitemsShown] = useState(3)
+  const [title, setTitle] = useState('')
+
+  const showMore = () => {
+    setNumberOfitemsShown(numberOfitemsShown+3)
+  }
+  const tmdbImageFormat = "https://image.tmdb.org/t/p/w500/"
+
+  // Warning: Each child in a list should have a unique "key" prop.
+  // what if total number of item is less than 3?
+  const itemsToShow = 
+    anime.slice(0, numberOfitemsShown).map(eachAnime => {
+      return (
+        <Image
+          borderRadius="full"
+          boxSize="150px"
+          src= {tag == 'mal' ?  eachAnime.image_url : tmdbImageFormat + eachAnime.poster_path}
+          alt= 'poster images'
+        />
+      )
+    });
+
   return (
     <div>
-      {
-        anime.map(res => {
-          {console.log(res)}
-            return(
-              // Each child in a list should have a unique "key" prop
-              <Image
-                borderRadius="full"
-                boxSize="150px"
-                src= {res.image_url}
-                alt= {res.title}
-              />
-            )
-        })
-      }
+      {itemsToShow}
+      <Button
+        colorScheme="blue"
+        variant="outline"
+        onClick={showMore}
+      >
+        Expand
+      </Button>
     </div>
   )
-
-
 }
 
+// right way to get image from TMDB is using the config api to get base link and size variations and img link can be grabbed from simple search
+
 export async function getServerSideProps(context) {
-  const { query } = context
+  const { query, req, res } = context
   var searchResult;
   try {
-    const res = await axios.get(`http://127.0.0.1:8000/data/${query.search}`)
+    const res = await axios.get(`http://127.0.0.1:8000/data/${query.tag}/${query.search}`)
     searchResult = res.data
   } catch (error) {
     console.log(error)
   }
 
   return {
-    props: {anime : searchResult.Message.results}
+    props: {
+      anime : searchResult.results,
+      tag: query.tag
+    }
   }
 }
 
-{/*  */}

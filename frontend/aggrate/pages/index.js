@@ -45,13 +45,13 @@ export default function Home() {
           <a className={styles.card}>
             <h2>MAL &rarr;</h2>
             <p>Find in-depth information about your favourite animes.</p>
-            <Search category = {'MyAnimeList'}/>
+            <Search category = {'mal'}/>
           </a>
 
           <a className={styles.card}>
-            <h2>IMDB &rarr;</h2>
+            <h2>TMDB &rarr;</h2>
             <p>Learn more about your favorite TV Shows!</p>
-            <Search category = {'IMDB'}/>
+            <Search category = {'tmdb'}/>
           </a>
 
         </div>
