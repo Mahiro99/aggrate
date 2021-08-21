@@ -1,1 +1,0 @@
-// #each returned searchInput object design

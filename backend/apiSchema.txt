@@ -1,3 +1,9 @@
+rebuild the virtual environment using:
+    pip install -r requirements.txt
+add to requirements using:
+    pip3 freeze > requirements.txt 
+
+
 MAL
 # Structure Search of just the name
     # --> an array of search.results
