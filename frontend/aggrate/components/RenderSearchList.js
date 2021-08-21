@@ -20,6 +20,7 @@ export const RenderSearchList = (props) => {
 	
 	const handleShowDiffSources = (source) => {
 		setShowMultiSource(source.checked)
+		console.log(showMultiSource,"hm")
 	}
 		
 	// ideally i should send the data back from backend properly formatted, so not to do this

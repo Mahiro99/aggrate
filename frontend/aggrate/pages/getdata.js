@@ -2,11 +2,11 @@ import { React, useState} from 'react'
 import axios from 'axios'
 import { Button } from "@chakra-ui/react"
 import { RenderSearchList } from '../components/RenderSearchList'
-import { VisuallyHidden } from "@chakra-ui/react"
 
 
 
-export default function list ({data, tag}) {
+
+export default function getdata ({data, tag}) {
   const [numberOfitemsShown, setNumberOfitemsShown] = useState(3)
 
   const showMore = () => {

@@ -30,12 +30,12 @@ export const Search = (props) => {
 		onSubmit: values => {
 			return (
 				router.push({
-					pathname: '/shows',
+					pathname: '/getdata',
 					query: {
 						tag: props.category,
 						search : values.search
 					},
-				  })
+				})
 			)
 		},
 	});

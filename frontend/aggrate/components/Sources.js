@@ -33,15 +33,15 @@ export const Sources = (props) => {
 						<div id="checkbox-source-group"><b>Source Tab</b></div>
 						<div role="group" aria-labelledby="checkbox-source-group">
 							<label>
-								<Field type="checkbox" name="checked" value="MAL" />
+								<Field type="checkbox" name="checked" value="mal" />
 								MAL
 							</label>
 							<label>
-								<Field type="checkbox" name="checked" value="TMDB" />
+								<Field type="checkbox" name="checked" value="tmdb" />
 								TMDB
 							</label>
 							<label>
-								<Field type="checkbox" name="checked" value="RT" />
+								<Field type="checkbox" name="checked" value="rt" />
 								RT
 							</label>
 						</div>
