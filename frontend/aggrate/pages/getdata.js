@@ -2,12 +2,14 @@ import { React, useState} from 'react'
 import axios from 'axios'
 import { Button } from "@chakra-ui/react"
 import { RenderSearchList } from '../components/RenderSearchList'
+import { useRouter } from 'next/router'
 
 
 
 
 export default function getdata ({data, tag}) {
   const [numberOfitemsShown, setNumberOfitemsShown] = useState(3)
+  const router = useRouter()
 
   const showMore = () => {
     setNumberOfitemsShown(numberOfitemsShown+3)
@@ -15,7 +17,7 @@ export default function getdata ({data, tag}) {
 
   return (
     <div>
-      <RenderSearchList data = {data} tag = {tag} numberOfitemsShown={numberOfitemsShown} />
+      <RenderSearchList data = {data} tag = {tag} numberOfitemsShown={numberOfitemsShown} search = {router.query.search}/>
       <Button
         colorScheme="blue"
         variant="outline"
