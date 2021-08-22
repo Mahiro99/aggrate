@@ -2,7 +2,7 @@ import { React, useState, useEffect } from 'react'
 import { Image } from "@chakra-ui/react"
 import { Sources } from './Sources'
 export const RenderSearchList = (props) => {
-	
+	console.log(props)
 	// right way to get image from TMDB is using the config api to get base link and size variations and img link can be grabbed from simple search
 	const tmdbImageFormat = "https://image.tmdb.org/t/p/w185/"
 	const [source, setSource] =  useState(props.tag) 
@@ -26,9 +26,10 @@ export const RenderSearchList = (props) => {
 			setNewData(data.results)
 	}
 	
+	// if statement is working funky? idk its very weird, also mal to tmdb works, but tmdb to mal doesnt
 	const renderDesc = () => {
 
-		if(source== props.tag){
+		if(source == props.tag){
 			console.log("YAY!")
 			return (
 				props.data.slice(0, props.numberOfitemsShown).map(eachData => (
